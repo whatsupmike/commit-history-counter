@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+    php-fpm:
+      build: phpdocker/php-fpm
+      container_name: commit-history-counter-php-fpm
+      working_dir: /application
+      volumes:
+        - .:/application:delegated
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini:delegated
+        - ~/.composer/docker-cache/:/root/.composer:delegated
+      restart: unless-stopped
